@@ -1,8 +1,8 @@
 const breakpoints: { [index: string]: number } = {
-  sm: 500,
-  md: 768,
-  lg: 992,
-  xl: 1200,
+  sm: 0,
+  md: 500,
+  lg: 768,
+  xl: 992,
 };
 
 export const mq = Object.keys(breakpoints)

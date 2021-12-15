@@ -1,17 +1,17 @@
-import * as React from 'react';
-import styled from '@emotion/styled';
-import { mq } from '../util/styled';
-import { MdImageSearch } from 'react-icons/md';
+import * as React from "react";
+import styled from "@emotion/styled";
+import { mq } from "../util/styled";
+import { MdImageSearch } from "react-icons/md";
 
 const ImageUploadContainer = styled.section({
-  display: 'flex',
-  justifyContent: 'center',
+  display: "flex",
+  justifyContent: "center",
   padding: "3rem 1rem",
 });
 const ImageFileUpload = styled.input({
   width: 1,
   height: 1,
-  overflow: 'hidden',
+  overflow: "hidden",
   opacity: 0,
 });
 const ImageUploadButtonContainer = styled.section`
@@ -23,20 +23,27 @@ const ImageUploadButtonContainer = styled.section`
   &:hover {
     transform: scale(1.1);
   }
-  transition: .1s all ease;
+  transition: 0.1s all ease;
 `;
 const ImageSearchIcon = styled.div({
   fontSize: 40,
-  marginBottom: -6
+  marginBottom: -6,
 });
-const Label = styled.div({
-  fontSize: 27,
-  marginLeft: 64,
-  color: '#999999',
-})
+const Label = styled.div`
+  color: #999999;
+  ${mq["sm"]} {
+    font-size: 14px;
+    margin-left: 18px;
+  }
+  ${mq["lg"]} {
+    font-size: 27px;
+    margin-left: 64px;
+  }
+`;
 
 export interface ImageUploaderProps {
   onImageUpload: (image: string) => void;
+  reset: () => unknown;
 }
 
 export const ImageUploader = (props: ImageUploaderProps) => {
@@ -44,6 +51,7 @@ export const ImageUploader = (props: ImageUploaderProps) => {
   const [image, setImage] = React.useState<string | null>(null);
 
   const readImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.reset();
     const file = event.target.files && event.target.files[0];
     if (!file) {
       return;
@@ -54,19 +62,19 @@ export const ImageUploader = (props: ImageUploaderProps) => {
     reader.onload = () => {
       setImage(reader.result as string);
       props.onImageUpload(reader.result as string);
-    }
+    };
   };
 
   return (
     <ImageUploadContainer>
       <ImageFileUpload type="file" ref={imageInputRef} onChange={readImage} />
-      <ImageUploadButtonContainer onClick={() => imageInputRef.current?.click()}>
+      <ImageUploadButtonContainer
+        onClick={() => imageInputRef.current?.click()}
+      >
         <ImageSearchIcon>
-          <MdImageSearch style={{ fontSize: 'inherit' }} />
+          <MdImageSearch style={{ fontSize: "inherit" }} />
         </ImageSearchIcon>
-        <Label>
-          Upload images for your project
-        </Label>
+        <Label>Upload images for your project</Label>
       </ImageUploadButtonContainer>
     </ImageUploadContainer>
   );

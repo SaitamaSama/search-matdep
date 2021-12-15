@@ -3,15 +3,24 @@ import styled from "@emotion/styled";
 import ReactCrop, { ReactCropState } from "react-image-crop";
 import "./react-crop.scss";
 import { getCroppedImg } from "./util";
+import { mq } from "../util/styled";
 
-const ImageEditorContainer = styled.section({
-  width: "30vw",
-  height: "50vh",
-  margin: "2rem auto",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-});
+const ImageEditorContainer = styled.section`
+  width: 30vw;
+  height: 50vh;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  ${mq["lg"]} {
+    width: 30vw;
+    height: 50vh;
+  }
+  ${mq["sm"]} {
+    width: 90vw;
+    height: 50vh;
+  }
+`;
 const Button = styled.button({
   border: "none",
   outline: "none",

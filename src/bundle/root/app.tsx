@@ -4,15 +4,24 @@ import { ImageEditor } from "../image/image-editor";
 import { ImageUploader } from "../image/image-uploader";
 import styled from "@emotion/styled";
 import { IProduct, Product } from "../product/product";
+import { mq } from "../util/styled";
 
-const CroppedImageDisplay = styled.div({
-  width: "30vw",
-  height: "50vh",
-  margin: "2rem auto",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-});
+const CroppedImageDisplay = styled.div`
+  width: 30vw;
+  height: 50vh;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  ${mq["lg"]} {
+    width: 30vw;
+    height: 50vh;
+  }
+  ${mq["sm"]} {
+    width: 90vw;
+    height: 50vh;
+  }
+`;
 const ProductGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -47,13 +56,19 @@ export const App = () => {
   return (
     <>
       <Header />
-      <ImageUploader onImageUpload={setImage} />
+      <ImageUploader
+        onImageUpload={setImage}
+        reset={() => {
+          setImage(null);
+          setCroppedImage(null);
+        }}
+      />
       {image && !croppedImage && (
         <ImageEditor image={image} onImageFinish={setCroppedImage} />
       )}
       {croppedImage && (
         <CroppedImageDisplay>
-          <img src={croppedImage} alt="cropped" />
+          <img src={croppedImage} alt="cropped" style={{ maxWidth: "100%" }} />
         </CroppedImageDisplay>
       )}
       {results.length > 0 && (

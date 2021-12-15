@@ -56,6 +56,7 @@ background: url(${props.background});
 background-size: cover;
 border: 1px solid #e2e2e2;
 position: relative;
+margin: auto;
 `,
 );
 const ProductTitle = styled.div({
