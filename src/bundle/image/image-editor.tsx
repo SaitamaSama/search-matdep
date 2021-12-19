@@ -80,6 +80,10 @@ export const ImageEditor = (props: ImageEditorProps) => {
           imageRef.current = image;
           return true;
         }}
+        imageStyle={{
+          maxWidth: "100%",
+          maxHeight: "40vh",
+        }}
       />
       <Button onClick={search}>Search</Button>
     </ImageEditorContainer>

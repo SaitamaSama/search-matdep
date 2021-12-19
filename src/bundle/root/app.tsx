@@ -72,11 +72,13 @@ export const App = () => {
         </CroppedImageDisplay>
       )}
       {results.length > 0 && (
-        <ProductGrid>
-          {results.map((product) => (
-            <Product key={product.AWS_LINK_1} {...product} />
-          ))}
-        </ProductGrid>
+        <>
+          <ProductGrid>
+            {results.map((product) => (
+              <Product key={product.AWS_LINK_1} {...product} />
+            ))}
+          </ProductGrid>
+        </>
       )}
     </>
   );

@@ -28,6 +28,15 @@ const ImageUploadButtonContainer = styled.section`
 const ImageSearchIcon = styled.div({
   fontSize: 40,
   marginBottom: -6,
+  padding: "0.5rem",
+  border: "1px solid #B6B6B6",
+  width: 64,
+  height: 64,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  borderRadius: 5,
+  backgroundColor: "#080808",
 });
 const Label = styled.div`
   color: #999999;
@@ -36,7 +45,7 @@ const Label = styled.div`
     margin-left: 18px;
   }
   ${mq["lg"]} {
-    font-size: 27px;
+    font-size: 22px;
     margin-left: 64px;
   }
 `;
