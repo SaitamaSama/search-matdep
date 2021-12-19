@@ -5,6 +5,7 @@ import { ImageUploader } from "../image/image-uploader";
 import styled from "@emotion/styled";
 import { IProduct, Product } from "../product/product";
 import { mq } from "../util/styled";
+import { FeedbackModal } from "../modal/feedback";
 
 const CroppedImageDisplay = styled.div`
   width: 30vw;
@@ -33,6 +34,7 @@ export const App = () => {
   const [image, setImage] = React.useState<string | null>(null);
   const [croppedImage, setCroppedImage] = React.useState<string | null>(null);
   const [results, setResults] = React.useState<Array<IProduct>>([]);
+  const [feedbackModalVisible, setFeedbackModalVisible] = React.useState(false);
 
   React.useEffect(() => {
     if (croppedImage && croppedImage.length > 0) {
@@ -53,8 +55,31 @@ export const App = () => {
     }
   }, [croppedImage]);
 
+  React.useEffect(() => {
+    function onMouseOut(event: any) {
+      // If the mouse is near the top of the window, show the popup
+      // Also, do NOT trigger when hovering or clicking on selects
+      if (
+        event.clientY < 50 &&
+        event.relatedTarget == null &&
+        event.target.nodeName.toLowerCase() !== "select"
+      ) {
+        // Remove this event listener
+        window.document.removeEventListener("mouseout", onMouseOut);
+
+        // Show the popup
+        setFeedbackModalVisible(true);
+      }
+    }
+
+    window.document.addEventListener("mouseout", onMouseOut);
+  }, []);
+
   return (
     <>
+      {feedbackModalVisible && (
+        <FeedbackModal onClose={() => setFeedbackModalVisible(false)} />
+      )}
       <Header />
       <ImageUploader
         onImageUpload={setImage}
