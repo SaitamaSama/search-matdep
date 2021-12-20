@@ -60,7 +60,6 @@ export const App = () => {
       // If the mouse is near the top of the window, show the popup
       // Also, do NOT trigger when hovering or clicking on selects
       if (
-        event.clientY < 50 &&
         event.relatedTarget == null &&
         event.target.nodeName.toLowerCase() !== "select"
       ) {
